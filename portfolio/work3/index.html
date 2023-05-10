@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>thishaseeb Blog</title>
+<meta name="description" content="Describe your website">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/owl.carousel.css">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/owl.theme.css">
+
+
+  <link href="https://thishaseeb.github.io/css/style.blue.css" rel="stylesheet" id="theme-stylesheet">
+
+ 
+
+  
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+
+<link href="https://thishaseeb.github.io/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://thishaseeb.github.io/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              <div id="sidebar" class="col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="https://thishaseeb.github.io/">thishaseeb Blog</a></h1>
+    
+      <p class="sidebar-p">I am a professional Dev Ops engineer working with a special interest in programming. This here is an attempt to contain my varying interests in one place!</p>
+    
+    <ul class="sidebar-menu">
+      
+        <li><a href="https://thishaseeb.github.io/portfolio">Home</a></li>
+      
+        <li><a href="https://thishaseeb.github.io/contact/">Get in touch</a></li>
+      
+    </ul>
+    <p class="social">
+  
+  
+  
+  
+  <a href="https://instagram.com" title="" class="external instagram" title="Instagram" rel="me">
+    <i class="fa fa-instagram"></i>
+  </a>
+  
+  
+  <a href="mailto:email@example.com" data-animate-hover="pulse" class="email" title="E-mail">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://github.com/thishaseeb" data-animate-hover="pulse" class="external" title="GitHub" rel="me">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  <a href="wa.me%20service%20link" data-animate-hover="pulse" class="external" title="WhatsApp">
+    <i class="fa fa-whatsapp"></i>
+  </a>
+  
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2023 Haseeb M. |
+        
+        Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+              
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="https://thishaseeb.github.io/">thishaseeb Blog</a></h1>
+</div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="content-column-content">
+         <h1>2. Connecting to MT5 and creating helper functions</h1>
+         <p>Algorithmic Trading is allegedly fairly common, however almost kept behind lock and key for the majority of the non-technical public. Retail Traders appear to focus more on rather manual trading strategies. I love automation. So lets take a crack at it.</p>
+<p>Okay, so. Following on from the last stage, this is the rough outline for what I figured would be next.</p>
+<ol>
+<li>Open up a broker account/demo account with a broker. Likely IC markets, as I&rsquo;m most familiar with them, and they offer a spreadbetting account in the UK which has tax benefits.</li>
+<li>Install Python3 and MT5 module</li>
+<li>Write initial test script to have Python able to interact with MT5</li>
+<li>Get trading data from MT5</li>
+<li>Open test positions in Demo Account</li>
+</ol>
+<p>Lets try it.</p>
+<p><em>Note, I&rsquo;m not giving any financial advise, and am not telling you to follow these steps, this is purely a blog for the purpose of entertainment and tracking. If you choose to repeat the steps, you choose to do so at your own risk.</em></p>
+<h2 id="opening-a-trading-account">Opening a trading account.</h2>
+<p>I already have one.
+Done ✔.</p>
+<h2 id="install-mt5-and-set-up-account">Install MT5 and Set up Account.</h2>
+<p>Before that we need to install MT5.</p>
+<p>IC Markets has their own version, once you make an account, theres a link to download in the downloads section.</p>
+<p>IC Markets also gives easy access to practise accounts, using paper money. Although depending on who&rsquo;s analysis of the world you agree with, all money could be considered paper money.</p>
+<p>So. I&rsquo;ve gone and downloaded and installed MT5 on my trusty steed my Asus laptop running yee ol Windows 11, and created a Demo account, and logged in.</p>
+<p>Specs to keep is realistic:</p>
+<pre><code>Trading Platform: MT5
+Account Type: Standard Account
+Currency: GBP
+Leverage: 1:30
+Initial Deposit: 200
+</code></pre><p>Of course, since we&rsquo;ll only be trialing the strat for the time being, the initial deposit doesn&rsquo;t matter so much. One we have the mechanics worked out thats when it will make the biggest difference.</p>
+<p>Logs in. Oh boy, I forgot about Metatrader&rsquo;s glorious sound effects.</p>
+<h2 id="install-python3-and-mt5-module">Install Python3 and MT5 module</h2>
+<p>Maybe at this point its worth mentioning, this blog likely isn&rsquo;t the best to learn how to program from. I&rsquo;ll be approaching it as more of a log rather than a tutorial for beginners, for example if you&rsquo;re new to Python and don&rsquo;t know how to install it, there&rsquo;s probably a better guide out there on how to do that! YouTube is great also.</p>
+<p>Standard stuff Really.</p>
+<p><a href="https://www.python.org/downloads/">Python Downloads Page</a></p>
+<h3 id="my-version-of-events">My Version of events</h3>
+<p>The Software versions I&rsquo;m running are as follows:</p>
+<p>I&rsquo;m using <code>WSL 2</code> running <code>Ubuntu 20.04.4 LTS</code>, <code>Python 3.8.10</code>, and <code>pip 20.0.2</code>.</p>
+<h3 id="installing-mt5-module">Installing MT5 module</h3>
+<p>I&rsquo;m following <a href="https://www.youtube.com/watch?v=zu2q28h9Uvc">this</a> guide for this process.</p>
+<p>Oh. Metatrader&rsquo;s module doesn&rsquo;t support ubuntu. Guess we&rsquo;re working with powershell and windows.</p>
+<p><code>pip install MetaTrader5</code></p>
+<p><em>fun fact</em></p>
+<p>If you have Python2 and Python3 installed, sometimes your pip command will point to the Python2 pip, and if you&rsquo;re developing with Python3, you&rsquo;ll find your modules that you&rsquo;re attempting to install.. won&rsquo;t. In that case what you can do is specify it as a module for Python3. I used this.</p>
+<p><code>python3 -m pip install MetaTrader5</code></p>
+<h2 id="write-initial-test-script-to-have-python-able-to-interact-with-mt5">Write initial test script to have Python able to interact with MT5</h2>
+<p>Looks like the MT5 Module has some example code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> time
+<span style="color:#f92672">import</span> MetaTrader5 <span style="color:#f92672">as</span> mt5
+ 
+<span style="color:#75715e"># display data on the MetaTrader 5 package</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;MetaTrader5 package author: &#34;</span>, mt5<span style="color:#f92672">.</span>__author__)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;MetaTrader5 package version: &#34;</span>, mt5<span style="color:#f92672">.</span>__version__)
+ 
+<span style="color:#75715e"># establish connection to the MetaTrader 5 terminal</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> mt5<span style="color:#f92672">.</span>initialize():
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;initialize() failed, error code =&#34;</span>,mt5<span style="color:#f92672">.</span>last_error())
+    quit()
+ 
+<span style="color:#75715e"># prepare the buy request structure</span>
+symbol <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;USDJPY&#34;</span>
+symbol_info <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>symbol_info(symbol)
+<span style="color:#66d9ef">if</span> symbol_info <span style="color:#f92672">is</span> None:
+    <span style="color:#66d9ef">print</span>(symbol, <span style="color:#e6db74">&#34;not found, can not call order_check()&#34;</span>)
+    mt5<span style="color:#f92672">.</span>shutdown()
+    quit()
+ 
+<span style="color:#75715e"># if the symbol is unavailable in MarketWatch, add it</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> symbol_info<span style="color:#f92672">.</span>visible:
+    <span style="color:#66d9ef">print</span>(symbol, <span style="color:#e6db74">&#34;is not visible, trying to switch on&#34;</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> mt5<span style="color:#f92672">.</span>symbol_select(symbol,True):
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;symbol_select({}}) failed, exit&#34;</span>,symbol)
+        mt5<span style="color:#f92672">.</span>shutdown()
+        quit()
+ 
+lot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.1</span>
+point <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>symbol_info(symbol)<span style="color:#f92672">.</span>point
+price <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>symbol_info_tick(symbol)<span style="color:#f92672">.</span>ask
+deviation <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+request <span style="color:#f92672">=</span> {
+    <span style="color:#e6db74">&#34;action&#34;</span>: mt5<span style="color:#f92672">.</span>TRADE_ACTION_DEAL,
+    <span style="color:#e6db74">&#34;symbol&#34;</span>: symbol,
+    <span style="color:#e6db74">&#34;volume&#34;</span>: lot,
+    <span style="color:#e6db74">&#34;type&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_TYPE_BUY,
+    <span style="color:#e6db74">&#34;price&#34;</span>: price,
+    <span style="color:#e6db74">&#34;sl&#34;</span>: price <span style="color:#f92672">-</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> point,
+    <span style="color:#e6db74">&#34;tp&#34;</span>: price <span style="color:#f92672">+</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> point,
+    <span style="color:#e6db74">&#34;deviation&#34;</span>: deviation,
+    <span style="color:#e6db74">&#34;magic&#34;</span>: <span style="color:#ae81ff">234000</span>,
+    <span style="color:#e6db74">&#34;comment&#34;</span>: <span style="color:#e6db74">&#34;python script open&#34;</span>,
+    <span style="color:#e6db74">&#34;type_time&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_TIME_GTC,
+    <span style="color:#e6db74">&#34;type_filling&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_FILLING_RETURN,
+}
+ 
+<span style="color:#75715e"># send a trading request</span>
+result <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>order_send(request)
+<span style="color:#75715e"># check the execution result</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;1. order_send(): by {} {} lots at {} with deviation={} points&#34;</span><span style="color:#f92672">.</span>format(symbol,lot,price,deviation));
+<span style="color:#66d9ef">if</span> result<span style="color:#f92672">.</span>retcode <span style="color:#f92672">!=</span> mt5<span style="color:#f92672">.</span>TRADE_RETCODE_DONE:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;2. order_send failed, retcode={}&#34;</span><span style="color:#f92672">.</span>format(result<span style="color:#f92672">.</span>retcode))
+    <span style="color:#75715e"># request the result as a dictionary and display it element by element</span>
+    result_dict<span style="color:#f92672">=</span>result<span style="color:#f92672">.</span>_asdict()
+    <span style="color:#66d9ef">for</span> field <span style="color:#f92672">in</span> result_dict<span style="color:#f92672">.</span>keys():
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;   {}={}&#34;</span><span style="color:#f92672">.</span>format(field,result_dict[field]))
+        <span style="color:#75715e"># if this is a trading request structure, display it element by element as well</span>
+        <span style="color:#66d9ef">if</span> field<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;request&#34;</span>:
+            traderequest_dict<span style="color:#f92672">=</span>result_dict[field]<span style="color:#f92672">.</span>_asdict()
+            <span style="color:#66d9ef">for</span> tradereq_filed <span style="color:#f92672">in</span> traderequest_dict:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;       traderequest: {}={}&#34;</span><span style="color:#f92672">.</span>format(tradereq_filed,traderequest_dict[tradereq_filed]))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;shutdown() and quit&#34;</span>)
+    mt5<span style="color:#f92672">.</span>shutdown()
+    quit()
+ 
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;2. order_send done, &#34;</span>, result)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;   opened position with POSITION_TICKET={}&#34;</span><span style="color:#f92672">.</span>format(result<span style="color:#f92672">.</span>order))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;   sleep 2 seconds before closing position #{}&#34;</span><span style="color:#f92672">.</span>format(result<span style="color:#f92672">.</span>order))
+time<span style="color:#f92672">.</span>sleep(<span style="color:#ae81ff">2</span>)
+<span style="color:#75715e"># create a close request</span>
+position_id<span style="color:#f92672">=</span>result<span style="color:#f92672">.</span>order
+price<span style="color:#f92672">=</span>mt5<span style="color:#f92672">.</span>symbol_info_tick(symbol)<span style="color:#f92672">.</span>bid
+deviation<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>
+request<span style="color:#f92672">=</span>{
+    <span style="color:#e6db74">&#34;action&#34;</span>: mt5<span style="color:#f92672">.</span>TRADE_ACTION_DEAL,
+    <span style="color:#e6db74">&#34;symbol&#34;</span>: symbol,
+    <span style="color:#e6db74">&#34;volume&#34;</span>: lot,
+    <span style="color:#e6db74">&#34;type&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_TYPE_SELL,
+    <span style="color:#e6db74">&#34;position&#34;</span>: position_id,
+    <span style="color:#e6db74">&#34;price&#34;</span>: price,
+    <span style="color:#e6db74">&#34;deviation&#34;</span>: deviation,
+    <span style="color:#e6db74">&#34;magic&#34;</span>: <span style="color:#ae81ff">234000</span>,
+    <span style="color:#e6db74">&#34;comment&#34;</span>: <span style="color:#e6db74">&#34;python script close&#34;</span>,
+    <span style="color:#e6db74">&#34;type_time&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_TIME_GTC,
+    <span style="color:#e6db74">&#34;type_filling&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_FILLING_RETURN,
+}
+<span style="color:#75715e"># send a trading request</span>
+result<span style="color:#f92672">=</span>mt5<span style="color:#f92672">.</span>order_send(request)
+<span style="color:#75715e"># check the execution result</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;3. close position #{}: sell {} {} lots at {} with deviation={} points&#34;</span><span style="color:#f92672">.</span>format(position_id,symbol,lot,price,deviation));
+<span style="color:#66d9ef">if</span> result<span style="color:#f92672">.</span>retcode <span style="color:#f92672">!=</span> mt5<span style="color:#f92672">.</span>TRADE_RETCODE_DONE:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;4. order_send failed, retcode={}&#34;</span><span style="color:#f92672">.</span>format(result<span style="color:#f92672">.</span>retcode))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;   result&#34;</span>,result)
+<span style="color:#66d9ef">else</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;4. position #{} closed, {}&#34;</span><span style="color:#f92672">.</span>format(position_id,result))
+    <span style="color:#75715e"># request the result as a dictionary and display it element by element</span>
+    result_dict<span style="color:#f92672">=</span>result<span style="color:#f92672">.</span>_asdict()
+    <span style="color:#66d9ef">for</span> field <span style="color:#f92672">in</span> result_dict<span style="color:#f92672">.</span>keys():
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;   {}={}&#34;</span><span style="color:#f92672">.</span>format(field,result_dict[field]))
+        <span style="color:#75715e"># if this is a trading request structure, display it element by element as well</span>
+        <span style="color:#66d9ef">if</span> field<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;request&#34;</span>:
+            traderequest_dict<span style="color:#f92672">=</span>result_dict[field]<span style="color:#f92672">.</span>_asdict()
+            <span style="color:#66d9ef">for</span> tradereq_filed <span style="color:#f92672">in</span> traderequest_dict:
+                <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;       traderequest: {}={}&#34;</span><span style="color:#f92672">.</span>format(tradereq_filed,traderequest_dict[tradereq_filed]))
+ 
+<span style="color:#75715e"># shut down connection to the MetaTrader 5 terminal</span>
+mt5<span style="color:#f92672">.</span>shutdown()
+ 
+</code></pre></div><p><a href="https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py">source</a></p>
+<p>WIP.</p>
+<p>~H</p>
+<p><em>2023-05-10</em></p>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+          </div>
+      </div>
+  </div>
+  <script src="https://thishaseeb.github.io/js/jquery.min.js"></script>
+<script src="https://thishaseeb.github.io/js/bootstrap.min.js"></script>
+<script src="https://thishaseeb.github.io/js/jquery.cookie.js"> </script>
+<script src="https://thishaseeb.github.io/js/ekko-lightbox.js"></script>
+<script src="https://thishaseeb.github.io/js/jquery.scrollTo.min.js"></script>
+<script src="https://thishaseeb.github.io/js/masonry.pkgd.min.js"></script>
+<script src="https://thishaseeb.github.io/js/imagesloaded.pkgd.min.js"></script>
+<script src="https://thishaseeb.github.io/js/owl.carousel.min.js"></script>
+<script src="https://thishaseeb.github.io/js/front.js"></script>
+
+
+
+</body>
+</html>
