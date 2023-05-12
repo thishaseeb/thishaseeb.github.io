@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>thishaseeb Blog</title>
+<meta name="description" content="Describe your website">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/owl.carousel.css">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/owl.theme.css">
+
+
+  <link href="https://thishaseeb.github.io/css/style.blue.css" rel="stylesheet" id="theme-stylesheet">
+
+ 
+
+  
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+
+<link href="https://thishaseeb.github.io/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://thishaseeb.github.io/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              <div id="sidebar" class="col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="https://thishaseeb.github.io/">thishaseeb Blog</a></h1>
+    
+      <p class="sidebar-p">I am a professional Dev Ops engineer working with a special interest in programming. This here is an attempt to contain my varying interests in one place!</p>
+    
+    <ul class="sidebar-menu">
+      
+        <li><a href="https://thishaseeb.github.io/portfolio">Home</a></li>
+      
+        <li><a href="https://thishaseeb.github.io/contact/">Get in touch</a></li>
+      
+    </ul>
+    <p class="social">
+  
+  
+  
+  
+  <a href="https://instagram.com" title="" class="external instagram" title="Instagram" rel="me">
+    <i class="fa fa-instagram"></i>
+  </a>
+  
+  
+  <a href="mailto:email@example.com" data-animate-hover="pulse" class="email" title="E-mail">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://github.com/thishaseeb" data-animate-hover="pulse" class="external" title="GitHub" rel="me">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  <a href="wa.me%20service%20link" data-animate-hover="pulse" class="external" title="WhatsApp">
+    <i class="fa fa-whatsapp"></i>
+  </a>
+  
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2023 Haseeb M. |
+        
+        Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+              
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="https://thishaseeb.github.io/">thishaseeb Blog</a></h1>
+</div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="content-column-content">
+         <h1>3. Script for the first position</h1>
+         <p>Algorithmic Trading is allegedly fairly common, however almost kept behind lock and key for the majority of the non-technical public. Retail Traders appear to focus more on rather manual trading strategies. I love automation. So lets take a crack at it.</p>
+<p>Following on from the last installment. The example code was failing to run successfully with the following error:</p>
+<pre><code>1. order_send(): by GBPUSD 0.1 lots at 1.245 with deviation=20 points
+2. order_send failed, retcode=10030
+   retcode=10030
+   deal=0
+   order=0
+   volume=0.0
+   price=0.0
+   bid=0.0
+   ask=0.0
+   comment=Unsupported filling mode
+   request_id=0
+   retcode_external=0
+   request=TradeRequest(action=1, magic=234000, order=0, symbol='GBPUSD', volume=0.1, price=1.245, stoplimit=0.0, sl=1.2440000000000002, tp=1.246, deviation=20, type=0, type_filling=2, type_time=0, expiration=0, comment='python script open', position=0, position_by=0)
+</code></pre><p>So in the process we&rsquo;re still here!:</p>
+<p><code>3. Write initial test script to have Python able to interact with MT5</code></p>
+<h2 id="debugging-the-script">Debugging the Script</h2>
+<p>Looks like the error arises due to the defined filling moe being unsupported. Not really sure what that is. So lets give it a quick <a href="https://chat.openai.com/">ChatGPT</a>.</p>
+<p><code>what are the supported filing modes for the mt5 python module, for subitting orders</code></p>
+<pre><code>The MetaTrader 5 (MT5) Python module provides several supported filing modes for submitting orders. These filing modes determine how orders are executed and processed by the trading platform. The available filing modes are:
+
+ORDER_FILLING_FOK (Fill or Kill): This mode requires the entire order to be executed immediately and completely; otherwise, it will be canceled.
+
+ORDER_FILLING_IOC (Immediate or Cancel): This mode executes the order partially or completely, but any portion that cannot be executed immediately will be canceled.
+
+ORDER_FILLING_RETURN (Return): This mode allows partial order execution. Any portion of the order that cannot be executed immediately remains in the order book until it is executed or canceled manually.
+
+ORDER_FILLING_RESERVED (Reserved): This mode is used for internal purposes and is not available for regular trading operations.
+
+When submitting an order using the MT5 Python module, you need to specify the desired filing mode as a parameter in the order request. For example, if you want to submit an order with Fill or Kill mode, you would set the filing mode as ORDER_FILLING_FOK in the order request.
+
+Please note that the availability and behavior of these filing modes may vary depending on the specific broker and trading environment you are using with the MT5 platform. It's always a good idea to consult the documentation or API reference of your broker or the MT5 Python module for the most accurate and up-to-date information regarding filing modes and their usage.
+</code></pre><p>So, lets try changing the line</p>
+<p><code>mt5.ORDER_FILLING_RETURN</code></p>
+<p>to</p>
+<p><code>mt5.ORDER_FILLING_IOC</code></p>
+<p>instead.</p>
+<p><strong>Progress!</strong></p>
+<p>Order opened and Closed Successfully. Woo!</p>
+<pre><code>python3 .\exampleconnect.py
+MetaTrader5 package author:  MetaQuotes Ltd.
+MetaTrader5 package version:  5.0.45
+1. order_send(): by GBPUSD 0.1 lots at 1.245 with deviation=20 points
+2. order_send done,  OrderSendResult(retcode=10009, deal=285100830, order=394540683, volume=0.1, price=1.245, bid=1.24491, ask=1.245, comment='Request executed', request_id=1157830844, retcode_external=0, request=TradeRequest(action=1, magic=234000, order=0, symbol='GBPUSD', volume=0.1, price=1.245, stoplimit=0.0, sl=1.2440000000000002, tp=1.246, deviation=20, type=0, type_filling=1, type_time=0, expiration=0, comment='python script open', position=0, position_by=0))
+   opened position with POSITION_TICKET=394540683
+   sleep 2 seconds before closing position #394540683
+3. close position #394540683: sell GBPUSD 0.1 lots at 1.24491 with deviation=20 points
+4. position #394540683 closed, OrderSendResult(retcode=10009, deal=285100831, order=394540686, volume=0.1, price=1.24491, bid=1.24491, ask=1.245, comment='Request executed', request_id=1157830845, retcode_external=0, request=TradeRequest(action=1, magic=234000, order=0, symbol='GBPUSD', volume=0.1, price=1.24491, stoplimit=0.0, sl=0.0, tp=0.0, deviation=20, type=1, type_filling=1, type_time=0, expiration=0, comment='python script close', position=394540683, position_by=0))
+   retcode=10009
+   deal=285100831
+   order=394540686
+   volume=0.1
+   price=1.24491
+   bid=1.24491
+   ask=1.245
+   comment=Request executed
+   request_id=1157830845
+   retcode_external=0
+   request=TradeRequest(action=1, magic=234000, order=0, symbol='GBPUSD', volume=0.1, price=1.24491, stoplimit=0.0, sl=0.0, tp=0.0, deviation=20, type=1, type_filling=1, type_time=0, expiration=0, comment='python script close', position=394540683, position_by=0)
+       traderequest: action=1
+       traderequest: magic=234000
+       traderequest: order=0
+       traderequest: symbol=GBPUSD
+       traderequest: volume=0.1
+       traderequest: price=1.24491
+       traderequest: stoplimit=0.0
+       traderequest: sl=0.0
+       traderequest: tp=0.0
+       traderequest: deviation=20
+       traderequest: type=1
+       traderequest: type_filling=1
+       traderequest: type_time=0
+       traderequest: expiration=0
+       traderequest: comment=python script close
+       traderequest: position=394540683
+       traderequest: position_by=0
+</code></pre><h1 id="cleaning-up-code">Cleaning up Code</h1>
+<p>Cleaning up code is always good, to make is more adaptable, readable, and generally put you in a good spot for debugging.</p>
+<p>I haven&rsquo;t added comments here but have added some print statements and seperated the example code into functions to be called instead of a single sequence of steps.</p>
+<p>This here would be an example of the adapted <code>openPosition</code> function. The final program will likely operate an analysis within a <code>while True:</code> loop, making it constantly reassess the algorithm and goods like that.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">openPosition</span>(symbol, price):
+    connectToMetaTrader()
+    <span style="color:#66d9ef">if</span> SENDING_ORDER:
+        <span style="color:#66d9ef">return</span>
+    SENDING_ORDER <span style="color:#f92672">=</span> True
+    request <span style="color:#f92672">=</span> {
+        <span style="color:#e6db74">&#34;action&#34;</span>: mt5<span style="color:#f92672">.</span>TRADE_ACTION_DEAL,
+        <span style="color:#e6db74">&#34;symbol&#34;</span>: symbol,
+        <span style="color:#e6db74">&#34;volume&#34;</span>: lot,
+        <span style="color:#e6db74">&#34;type&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_TYPE_BUY,
+        <span style="color:#e6db74">&#34;price&#34;</span>: price,
+        <span style="color:#e6db74">&#34;sl&#34;</span>: price <span style="color:#f92672">-</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> point,
+        <span style="color:#e6db74">&#34;tp&#34;</span>: price <span style="color:#f92672">+</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">*</span> point,
+        <span style="color:#e6db74">&#34;deviation&#34;</span>: DEVIATION,
+        <span style="color:#e6db74">&#34;magic&#34;</span>: <span style="color:#ae81ff">17829</span>,
+        <span style="color:#e6db74">&#34;comment&#34;</span>: <span style="color:#e6db74">&#34;Open Order&#34;</span>,
+        <span style="color:#e6db74">&#34;type_time&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_TIME_GTC,
+        <span style="color:#e6db74">&#34;type_filling&#34;</span>: mt5<span style="color:#f92672">.</span>ORDER_FILLING_IOC,
+    }
+    ORDERS<span style="color:#f92672">.</span>append(mt5<span style="color:#f92672">.</span>order_send(request))
+
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[info] openPosition |Sent Order:</span><span style="color:#ae81ff">\n\t</span><span style="color:#e6db74">Symbol: {} </span><span style="color:#ae81ff">\n\t</span><span style="color:#e6db74">Lots: {} </span><span style="color:#ae81ff">\n\t</span><span style="color:#e6db74">Price: {}&#34;</span><span style="color:#f92672">.</span>format(symbol,lot,price));
+
+    <span style="color:#66d9ef">if</span> ORDERS[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>retcode <span style="color:#f92672">!=</span> mt5<span style="color:#f92672">.</span>TRADE_RETCODE_DONE:
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[error] openPosition | order_send failed, retcode={}&#34;</span><span style="color:#f92672">.</span>format(ORDERS[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>retcode))
+        result_dict<span style="color:#f92672">=</span>result<span style="color:#f92672">.</span>_asdict()
+        <span style="color:#66d9ef">for</span> field <span style="color:#f92672">in</span> result_dict<span style="color:#f92672">.</span>keys():
+            <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;   {}={}&#34;</span><span style="color:#f92672">.</span>format(field,result_dict[field]))
+            <span style="color:#66d9ef">if</span> field<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;request&#34;</span>:
+                traderequest_dict<span style="color:#f92672">=</span>result_dict[field]<span style="color:#f92672">.</span>_asdict()
+                <span style="color:#66d9ef">for</span> tradereq_filed <span style="color:#f92672">in</span> traderequest_dict:
+                    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[error] openPosition | traderequest: {}={}&#34;</span><span style="color:#f92672">.</span>format(tradereq_filed,traderequest_dict[tradereq_filed]))
+        <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[info] openPosition | shutdown() and quit&#34;</span>)
+        disconnectFromMetaTrader()
+    SENDING_ORDER <span style="color:#f92672">=</span> False
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[info] openPosition | order_send done, &#34;</span>, ORDERS[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[info] openPosition |  opened position with POSITION_TICKET={}&#34;</span><span style="color:#f92672">.</span>format(ORDERS[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>order))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;[info] openPosition |  sleep 2 seconds before closing position #{}&#34;</span><span style="color:#f92672">.</span>format(ORDERS[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>order))
+</code></pre></div><h2 id="creating-a-git-repository">Creating a Git Repository</h2>
+<p>Adding version control to your code gives a lot of benefits, even if not pushed to a remote repository. The ability to see changes in code between intervals of progress can give much benefit. In my case, I have a github account, and I already have access set up via an ssh key, and so pushing to a new remote repository is straight forward, so I&rsquo;ve done it.</p>
+<p>Checkout my public repos and contributions at <a href="https://github.com/thishaseeb">Github - thishaseeb</a>.</p>
+<p><em>Worth noting, my professinal work is not under this user, so it&rsquo;s not an accurate representation of the work I&rsquo;ve done over the last few years!</em></p>
+<h2 id="next-steps">Next steps:</h2>
+<p><strong>Algorithm Design.</strong></p>
+<p>It&rsquo;s time to get the strategy on paper in diagram form and in a manner which will make it straight forwards, or reasonable straight forward to put into code!</p>
+<p>~H</p>
+<p><em>2023-05-12</em></p>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+          </div>
+      </div>
+  </div>
+  <script src="https://thishaseeb.github.io/js/jquery.min.js"></script>
+<script src="https://thishaseeb.github.io/js/bootstrap.min.js"></script>
+<script src="https://thishaseeb.github.io/js/jquery.cookie.js"> </script>
+<script src="https://thishaseeb.github.io/js/ekko-lightbox.js"></script>
+<script src="https://thishaseeb.github.io/js/jquery.scrollTo.min.js"></script>
+<script src="https://thishaseeb.github.io/js/masonry.pkgd.min.js"></script>
+<script src="https://thishaseeb.github.io/js/imagesloaded.pkgd.min.js"></script>
+<script src="https://thishaseeb.github.io/js/owl.carousel.min.js"></script>
+<script src="https://thishaseeb.github.io/js/front.js"></script>
+
+
+
+</body>
+</html>
