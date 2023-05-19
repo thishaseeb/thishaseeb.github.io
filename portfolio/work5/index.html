@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>thishaseeb Blog</title>
+<meta name="description" content="Describe your website">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/bootstrap.min.css">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,300,700,400italic">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/owl.carousel.css">
+<link rel="stylesheet" href="https://thishaseeb.github.io/css/owl.theme.css">
+
+
+  <link href="https://thishaseeb.github.io/css/style.blue.css" rel="stylesheet" id="theme-stylesheet">
+
+ 
+
+  
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+
+<link href="https://thishaseeb.github.io/css/custom.css" rel="stylesheet">
+<link rel="shortcut icon" href="https://thishaseeb.github.io/img/favicon.png">
+
+
+</head>
+<body>
+  <div id="all">
+      <div class="container-fluid">
+          <div class="row row-offcanvas row-offcanvas-left">
+              <div id="sidebar" class="col-xs-6 col-sm-4 col-md-3 sidebar-offcanvas">
+  <div class="sidebar-content">
+    <h1 class="sidebar-heading"><a href="https://thishaseeb.github.io/">thishaseeb Blog</a></h1>
+    
+      <p class="sidebar-p">I am a professional Dev Ops engineer working with a special interest in programming. This here is an attempt to contain my varying interests in one place!</p>
+    
+    <ul class="sidebar-menu">
+      
+        <li><a href="https://thishaseeb.github.io/portfolio">Home</a></li>
+      
+        <li><a href="https://thishaseeb.github.io/contact/">Get in touch</a></li>
+      
+    </ul>
+    <p class="social">
+  
+  
+  
+  
+  <a href="https://instagram.com" title="" class="external instagram" title="Instagram" rel="me">
+    <i class="fa fa-instagram"></i>
+  </a>
+  
+  
+  <a href="mailto:email@example.com" data-animate-hover="pulse" class="email" title="E-mail">
+    <i class="fa fa-envelope"></i>
+  </a>
+  
+  
+  
+  
+  <a href="https://github.com/thishaseeb" data-animate-hover="pulse" class="external" title="GitHub" rel="me">
+    <i class="fa fa-github"></i>
+  </a>
+  
+  
+  
+  
+  <a href="wa.me%20service%20link" data-animate-hover="pulse" class="external" title="WhatsApp">
+    <i class="fa fa-whatsapp"></i>
+  </a>
+  
+</p>
+
+
+    <div class="copyright">
+      <p class="credit">
+        
+          &copy;2023 Haseeb M. |
+        
+        Template by <a href="https://bootstrapious.com/free-templates" class="external">Bootstrapious.com</a>
+
+&amp; ported to Hugo by <a href="https://github.com/kishaningithub">Kishan B</a>
+
+      </p>
+    </div>
+  </div>
+</div>
+
+              
+<div class="col-xs-12 col-sm-8 col-md-9 content-column white-background">
+  <div class="small-navbar visible-xs">
+  <button type="button" data-toggle="offcanvas" class="btn btn-ghost pull-left"> <i class="fa fa-align-left"> </i>Menu</button>
+  <h1 class="small-navbar-heading"><a href="https://thishaseeb.github.io/">thishaseeb Blog</a></h1>
+</div>
+
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="content-column-content">
+         <h1>4. Algorithm design powered by ChatGPT</h1>
+         <p>Algorithmic Trading is allegedly fairly common, however almost kept behind lock and key for the majority of the non-technical public. Retail Traders appear to focus more on rather manual trading strategies. I love automation. So lets take a crack at it.</p>
+<p><em>Again, disclaimer, this is catagorically not financial advice, do not replicate these steps, any risk you carry is all yours if you do.</em></p>
+<h2 id="proposed-strategy">Proposed Strategy</h2>
+<p>In order to be able to code the strategy, we first should spend some time to write down what it is as a matter of steps. This will make programming it much more straightforward, as well as maintaining a strong structure to the code.</p>
+<p>The proposed Trading Strategy follows strict technical analysis, aiming for orders of RRR 1:3. This will become clear as to why it&rsquo;s important soon.</p>
+<p>In terms of the analysis required for the algorithm to actually trigger a position, whether its a buy or a sell order, what we&rsquo;re looking for is price to arrive around a support or resistance zone, and then we&rsquo;ll be waiting for it to bounce.</p>
+<p>Here&rsquo;s where the beauty of programming comes in. Along with the support/resistance zones, we can also check for trends where price appears to be forming an upward trend, or a downward trend. And then&hellip; we can backtest for what produces the highest probability of a successful trade with historical data, and go with that one! So many optimisations to be had in implementation! Since we&rsquo;ll have data on what is working and what isn&rsquo;t. Exciting!</p>
+<h2 id="support-and-resistance-zones">Support and Resistance Zones.</h2>
+<p>The code for analysis is something which is going to require some work, followed by some tuning. I dropped ChatGPT a query to get started:</p>
+<p><code>With mt5 and python, write a script to calculate support and resistance zones</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calculate_support_resistance</span>(data, n):
+    highs <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;High&#39;</span>]
+    lows <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Low&#39;</span>]
+    closes <span style="color:#f92672">=</span> data[<span style="color:#e6db74">&#39;Close&#39;</span>]
+    pivot_points <span style="color:#f92672">=</span> []
+    support_zones <span style="color:#f92672">=</span> []
+    resistance_zones <span style="color:#f92672">=</span> []
+
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n, len(data)):
+        high_range <span style="color:#f92672">=</span> highs[i<span style="color:#f92672">-</span>n:i]
+        low_range <span style="color:#f92672">=</span> lows[i<span style="color:#f92672">-</span>n:i]
+        close_range <span style="color:#f92672">=</span> closes[i<span style="color:#f92672">-</span>n:i]
+        pivot_point <span style="color:#f92672">=</span> (sum(high_range) <span style="color:#f92672">+</span> sum(low_range) <span style="color:#f92672">+</span> sum(close_range)) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">3</span> <span style="color:#f92672">*</span> n)
+        pivot_points<span style="color:#f92672">.</span>append(pivot_point)
+    
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(n, len(pivot_points)):
+        <span style="color:#66d9ef">if</span> pivot_points[i] <span style="color:#f92672">&lt;</span> min(pivot_points[i<span style="color:#f92672">-</span>n:i]):
+            support_zones<span style="color:#f92672">.</span>append(pivot_points[i])
+        <span style="color:#66d9ef">elif</span> pivot_points[i] <span style="color:#f92672">&gt;</span> max(pivot_points[i<span style="color:#f92672">-</span>n:i]):
+            resistance_zones<span style="color:#f92672">.</span>append(pivot_points[i])
+    
+    <span style="color:#66d9ef">return</span> support_zones, resistance_zones
+
+<span style="color:#75715e"># Example usage</span>
+<span style="color:#75715e"># Assuming you have a DataFrame named &#39;data&#39; with OHLC data</span>
+n_periods <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>  <span style="color:#75715e"># Number of periods to calculate support and resistance</span>
+support, resistance <span style="color:#f92672">=</span> calculate_support_resistance(data, n_periods)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Support Zones:&#34;</span>, support)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Resistance Zones:&#34;</span>, resistance)
+</code></pre></div><p>What is <code>OHLC Data</code>?? I hear you say.</p>
+<p>Open-High-Low-Close data. A candle consists of these 4 data points.</p>
+<p>I then popped this into my script and rejigged a few names, and created a function to get the latest n number of candles.</p>
+<p><code>can you write a function to fetch the last 100 candles of data and input into a DataFrame named 'data' with OHLC data</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> MetaTrader5 <span style="color:#f92672">as</span> mt5
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getLastCandles</span>(symbol, n, timeframe):
+    <span style="color:#75715e"># Connect to MetaTrader 5</span>
+    mt5<span style="color:#f92672">.</span>initialize()
+
+    <span style="color:#75715e"># Request the last n candles of data</span>
+    candles <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>copy_rates_from_pos(symbol, timeframe, <span style="color:#ae81ff">0</span>, n)
+
+    <span style="color:#75715e"># Create a DataFrame with OHLC data</span>
+    data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(candles, columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;time&#39;</span>, <span style="color:#e6db74">&#39;Open&#39;</span>, <span style="color:#e6db74">&#39;High&#39;</span>, <span style="color:#e6db74">&#39;Low&#39;</span>, <span style="color:#e6db74">&#39;Close&#39;</span>, <span style="color:#e6db74">&#39;Volume&#39;</span>])
+    data[<span style="color:#e6db74">&#39;time&#39;</span>] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_datetime(data[<span style="color:#e6db74">&#39;time&#39;</span>], unit<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;s&#39;</span>)
+
+    <span style="color:#75715e"># Close the connection to MetaTrader 5</span>
+    mt5<span style="color:#f92672">.</span>shutdown()
+
+    <span style="color:#66d9ef">return</span> data
+
+<span style="color:#75715e"># Example usage</span>
+symbol <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;EURUSD&#39;</span>  <span style="color:#75715e"># Replace with your desired symbol</span>
+n <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>  <span style="color:#75715e"># Number of candles to fetch</span>
+timeframe <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>TIMEFRAME_D1  <span style="color:#75715e"># Replace with your desired timeframe</span>
+
+data <span style="color:#f92672">=</span> getLastCandles(symbol, n, timeframe)
+<span style="color:#66d9ef">print</span>(data)
+
+</code></pre></div><p>This also required some rejigging. For example the line <code>data = pd.DataFrame(candles, columns=['time', 'Open', 'High', 'Low', 'Close', 'Volume'])</code> didn&rsquo;t quite work as well as was needed, so i searched up the example docs for that function and came across example code that didn&rsquo;t require the columns attribute.</p>
+<p>Changed the function to be more like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">getLastCandles</span>(symbol, n, timeframe):
+    connectToMetaTrader()
+    candles <span style="color:#f92672">=</span> mt5<span style="color:#f92672">.</span>copy_rates_from_pos(symbol, timeframe, <span style="color:#ae81ff">0</span>, n)
+    data <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(candles)
+    data[<span style="color:#e6db74">&#39;time&#39;</span>] <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>to_datetime(data[<span style="color:#e6db74">&#39;time&#39;</span>], unit<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;s&#39;</span>)
+    disconnectFromMetaTrader()
+    <span style="color:#66d9ef">return</span> data
+</code></pre></div><p>This was then able to be passed into the above function for analysis, again, after the <code>highs = data['High']</code>, <code>lows = data['Low']</code> and <code>closes = data['Close']</code> was updated to remove the capital letter in the key. Looks like this is just the way mt5 gives us the data, with lowercase keys.</p>
+<h2 id="first-result">First Result</h2>
+<p>So. I then had a bit of fun. Now we have an array of apparent zones which our first preliminary analysis algorithm thinks are support/resistance zones. I think this is going to be the most complex part of the analysis, once we have a good set of zones laid out, checking when price going past them and then hits again should be relatively straightforward. And so, the zones, we should definitely check if they&rsquo;re whats expected.</p>
+<p>Enter: <strong><a href="https://matplotlib.org/stable/api/index">Matplotlib</a>.</strong></p>
+<h3 id="glorious-programming">Glorious Programming</h3>
+<p>The beauty of programming rather than doing things by hand - repeatability. Everytime you run a script for the same input data, it returns the same output. Well, not all code does this of course, anything with any level of randomisation incorporated, or nowerdays AI will not do this, however a script like this will. And there&rsquo;s beauty in that, because whereas when doing things by hand, you need to account for fluctuations in mood/attention/irritability and the likes of the person doing it, with code, to test different alterations of a strategy, you simple wack it in a for loop and try them out.</p>
+<p>For example, the <code>calculate_support_resistance()</code> function takes in the parameters of <code>data</code>, and <code>n</code>. Now <code>n</code> here is the period to calculate over. Now whats the best period to chose? Who knows! So lets wack it in a loop, and iterate over a reasonable set of values, and then output the results for good measure and see what different values of <code>n</code> do!</p>
+<p><img src="../../img/portfolio/mt5-blog4-first-supp-res-output1.gif" alt=""></p>
+<p>Beautiful.</p>
+<p><em>Note, this is the n value changed from 1 to 149. And.. none of them really look quite like what we&rsquo;re looking for! :D</em></p>
+<h2 id="other-cleanup-done-after-the-last-update">Other cleanup done after the last update</h2>
+<ol>
+<li>Added the code for the script to Git for source control</li>
+<li>Wacked everything into functions, so now we have a:
+<code>connectToMetaTrader()</code>, <code>disconnectFromMetaTrader()</code>, <code>openPosition(x,y,z)</code>, <code>closePosition(x)</code>, <code>getLastCandles(n)</code>, <code>calculateSupportResistance()</code> and <code>plotSupportResistanceZones()</code>.
+So I can do something like this now for the GIF above <em>(ignore the distinct lack of comments!)</em>:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">candlesIn <span style="color:#f92672">=</span> getLastCandles(SYMBOL, <span style="color:#ae81ff">200</span>, mt5<span style="color:#f92672">.</span>TIMEFRAME_H1)
+<span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">150</span>,<span style="color:#ae81ff">1</span>):
+  supportZones, resistanceZones <span style="color:#f92672">=</span> calculateSupportResistance(candlesIn, i)
+  <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;N {}, Number of Zones {}&#34;</span><span style="color:#f92672">.</span>format(i, (len(supportZones) <span style="color:#f92672">+</span> len(resistanceZones))))
+  plt <span style="color:#f92672">=</span> plotSupportResistanceZones(candlesIn, supportZones[:len(candlesIn)], resistanceZones[:len(candlesIn)])
+  plt<span style="color:#f92672">.</span>savefig(<span style="color:#e6db74">&#34;figure{}.png&#34;</span><span style="color:#f92672">.</span>format(i), dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">350</span>)
+  plt<span style="color:#f92672">.</span>close()
+  <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;Outputted.&#34;</span>)
+</code></pre></div><ol start="3">
+<li>Renamed a few functions so the code is more readable</li>
+</ol>
+<h2 id="next-steps">Next steps:</h2>
+<ol>
+<li>Try another Support/Resistance Zone finding algorithm</li>
+<li>Tune said algorithm</li>
+<li>Create function for initiating trade based on break and retest</li>
+<li>Working towards: First test run</li>
+<li>Backtest to oblvion and optimise</li>
+</ol>
+<p>~H</p>
+<p><em>2023-05-19</em></p>
+         
+      </div>
+    </div>
+  </div>
+</div>
+
+          </div>
+      </div>
+  </div>
+  <script src="https://thishaseeb.github.io/js/jquery.min.js"></script>
+<script src="https://thishaseeb.github.io/js/bootstrap.min.js"></script>
+<script src="https://thishaseeb.github.io/js/jquery.cookie.js"> </script>
+<script src="https://thishaseeb.github.io/js/ekko-lightbox.js"></script>
+<script src="https://thishaseeb.github.io/js/jquery.scrollTo.min.js"></script>
+<script src="https://thishaseeb.github.io/js/masonry.pkgd.min.js"></script>
+<script src="https://thishaseeb.github.io/js/imagesloaded.pkgd.min.js"></script>
+<script src="https://thishaseeb.github.io/js/owl.carousel.min.js"></script>
+<script src="https://thishaseeb.github.io/js/front.js"></script>
+
+
+
+</body>
+</html>
